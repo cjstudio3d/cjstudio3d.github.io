@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>CJ Studio 3D · Loja</title>
+<meta name="description" content="Peças impressas em 3D sob encomenda: decoração, presentes e personalizados. Veja os produtos, monte seu carrinho e peça pelo WhatsApp.">
+<meta property="og:title" content="CJ Studio 3D · Ideias que ganham forma">
+<meta property="og:description" content="Peças impressas em 3D sob encomenda. Monte seu carrinho e peça pelo WhatsApp.">
+<meta property="og:type" content="website"><meta property="og:url" content="https://cjstudio3d.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Public+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light only;--bg:#fbf7f2;--card:#fff;--ink:#1d1a17;--muted:#6f675f;--line:#ece4da;--acc:#f26b1d;--acc2:#ffe7d6;--good:#1f8a4c;--r:16px;--f-d:'Bricolage Grotesque',system-ui,sans-serif;--f-b:'Public Sans',system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-b);-webkit-text-size-adjust:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:20;background:rgba(251,247,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:12px;padding:12px 0}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--acc);display:grid;place-items:center;color:#fff;font-family:var(--f-d);font-weight:800;font-size:18px;flex:none}
+.brand b{font-family:var(--f-d);font-size:18px;display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:12.5px}
+.sp{flex:1}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 14px;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.wa{background:#25d366;border-color:#25d366;color:#fff}
+.hero{padding:26px 0 10px}
+.hero h1{font-family:var(--f-d);font-size:clamp(26px,6vw,40px);margin:0 0 6px;line-height:1.05}
+.hero p{margin:0;color:var(--muted);max-width:620px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 6px}
+.tools input{flex:1;min-width:180px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 16px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;white-space:nowrap}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+h2.sec{font-family:var(--f-d);font-size:22px;margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:10px}}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.ph{position:relative;aspect-ratio:1/1;background:#f1ebe3;border:0;padding:0;width:100%;display:block}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .ini{display:grid;place-items:center;height:100%;font-family:var(--f-d);font-size:42px;color:#c9b9a6}
+.ph .n{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;border-radius:999px;padding:3px 8px}
+.bd{padding:10px 12px 12px;display:flex;flex-direction:column;gap:6px;flex:1}
+.bd h3{margin:0;font-size:15px;line-height:1.25}
+.med{font-size:12px;color:var(--muted)}
+.ds{font-size:13px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0}
+.pr{font-family:var(--f-d);font-size:20px;font-weight:800;color:var(--acc)}
+.pr s{font-family:var(--f-b);font-size:13px;color:var(--muted);font-weight:400;margin-right:4px}
+.bd select{border:1px solid var(--line);border-radius:10px;padding:7px 8px;background:#fff;font-size:13px;width:100%}
+.add{margin-top:auto;border:0;background:var(--ink);color:#fff;border-radius:12px;padding:10px;font-weight:700;font-size:14px}
+.add.ok{background:var(--good)}
+.fab{position:fixed;right:16px;bottom:16px;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:13px 18px;font-size:15px}
+.fab[hidden]{display:none}
+.badge{background:#fff;color:var(--acc);border-radius:999px;padding:1px 8px;font-size:12.5px}
+.ov{position:fixed;inset:0;background:rgba(20,16,12,.45);z-index:40;display:flex;justify-content:flex-end}
+.ov[hidden]{display:none}
+.drawer{background:var(--bg);width:min(460px,100%);height:100%;overflow-y:auto;padding:18px 16px 30px}
+.drawer h2{font-family:var(--f-d);margin:0;font-size:22px}
+.row{display:flex;align-items:center;gap:10px}
+.line{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px;margin-top:8px}
+.line img,.line .th{width:56px;height:56px;border-radius:10px;object-fit:cover;background:#f1ebe3;flex:none}
+.line .inf{flex:1;min-width:0}
+.line .inf b{display:block;font-size:14px}
+.line .inf small{color:var(--muted)}
+.qty{display:flex;align-items:center;gap:4px}
+.qty button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:#fff;font-weight:700}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+.fld{display:grid;gap:5px;margin-top:12px}
+.fld label{font-size:13px;font-weight:700}
+.fld input,.fld select,.fld textarea{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 12px;width:100%}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:14px;display:grid;gap:6px}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{font-family:var(--f-d);font-size:20px;font-weight:800;border-top:1px solid var(--line);padding-top:8px}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.err{color:#c0392b;font-size:13px;margin-top:8px;min-height:18px}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--r);padding:28px;text-align:center;color:var(--muted)}
+.zoom{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:50;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:16px}
+.zoom[hidden]{display:none}
+.zoom img{max-width:100%;max-height:78vh;border-radius:12px}
+.zoom .zb{display:flex;gap:8px}
+.zoom button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:999px;padding:9px 16px;font-weight:700}
+.kit{background:linear-gradient(135deg,#fff,#fff4ea);border:1px solid #f6d2b8;border-radius:var(--r);padding:14px;display:flex;flex-direction:column;gap:6px}
+.kit .it{font-size:13px;color:var(--muted)}
+footer{color:var(--muted);font-size:13px;padding:30px 0 90px;text-align:center}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:999px;padding:9px 16px;font-size:14px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.on{opacity:1}
+.done{background:#e9f7ef;border:1px solid #bfe6cf;border-radius:14px;padding:12px;margin-top:12px;font-size:14px}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <div class="logo">CJ</div>
+  <div class="brand"><b>CJ Studio 3D</b><small>Ideias que ganham forma</small></div>
+  <div class="sp"></div>
+  <a class="btn wa" id="waTop" href="#" target="_blank" rel="noopener">WhatsApp</a>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Peças impressas em 3D, feitas sob encomenda</h1>
+    <p id="heroTxt">Escolha os produtos, veja o frete para a sua cidade e envie a encomenda direto pelo WhatsApp. O pagamento é combinado na conversa.</p>
+  </section>
+  <div class="tools"><input id="q" type="search" placeholder="Buscar produto" aria-label="Buscar produto"></div>
+  <div class="chips" id="chips"></div>
+  <div id="kitsBox"></div>
+  <div id="lista"></div>
+</main>
+<footer class="wrap" id="foot">CJ Studio 3D · Ideias que ganham forma</footer>
+
+<button class="btn pri fab" id="fab" hidden>🛒 Ver encomenda <span class="badge" id="fabN">0</span></button>
+
+<div class="ov" id="ov" hidden><div class="drawer" role="dialog" aria-label="Sua encomenda">
+  <div class="row"><h2>Sua encomenda</h2><div class="sp"></div><button class="btn" id="close">Fechar</button></div>
+  <div id="cartLines"></div>
+  <form id="form" novalidate>
+    <div class="fld"><label for="ent">Entrega ou retirada</label><select id="ent"></select></div>
+    <div class="fld" id="endBox"><label for="end">Endereço (rua, número, bairro)</label><input id="end" autocomplete="street-address"></div>
+    <div class="fld"><label for="nome">Seu nome</label><input id="nome" autocomplete="name"></div>
+    <div class="fld"><label for="fone">Seu WhatsApp</label><input id="fone" inputmode="tel" autocomplete="tel" placeholder="(31) 9 9999-9999"></div>
+    <div class="fld"><label for="obs">Observações (cor, nome para personalizar, data que precisa)</label><textarea id="obs" rows="3"></textarea></div>
+    <div class="sum"><div><span>Produtos</span><b id="sProd">R$ 0,00</b></div><div><span>Entrega</span><b id="sFrete">R$ 0,00</b></div><div class="tot"><span>Total</span><span id="sTot">R$ 0,00</span></div></div>
+    <p class="err" id="err"></p>
+    <button class="btn wa" type="submit" style="width:100%;justify-content:center;padding:14px;font-size:16px;margin-top:4px">Enviar encomenda pelo WhatsApp</button>
+    <p class="note" id="prazo"></p>
+    <div id="doneBox"></div>
+  </form>
+</div></div>
+
+<div class="zoom" id="zoom" hidden><img id="zImg" alt=""><div id="zT" style="color:#fff;text-align:center;width:min(92vw,560px);font-size:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden"></div><div class="zb"><button id="zPrev">‹</button><button id="zClose">Fechar</button><button id="zNext">›</button></div></div>
+<div class="toast" id="toast"></div>
+
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const brl = v => (Number(v) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+let L = { produtos: [], kits: [], entregas: [] }, NICHO = '', Q = '', CART = [];
+const ls = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 1800); }
+function waNum() { let d = String(L.whatsapp || '').replace(/\D/g, ''); if (d && d.length <= 11) d = '55' + d; return d; }
+const waUrl = txt => 'https://wa.me/' + waNum() + (txt ? '?text=' + encodeURIComponent(txt) : '');
+
+async function load() {
+  try { const r = await fetch('loja.json?v=' + Date.now(), { cache: 'no-store' }); L = await r.json(); } catch (e) { L = {}; }
+  L.produtos ||= []; L.kits ||= []; L.entregas ||= [];
+  $('#waTop').href = waUrl('Olá! Vim pelo site da CJ Studio 3D.');
+  $('#prazo').textContent = [L.prazo, 'Pagamento combinado pelo WhatsApp (Pix ou cartão).'].filter(Boolean).join(' ');
+  $('#ent').innerHTML = L.entregas.map((e, i) => `<option value="${i}">${esc(e.nome)} · ${e.valor > 0 ? brl(e.valor) : 'grátis'}</option>`).join('') || '<option value="-1">Combinar pelo WhatsApp</option>';
+  const ok = new Set([...L.produtos.map(p => 'p:' + p.id), ...L.kits.map(k => 'k:' + k.id)]);
+  CART = ls.get('cj_cart', []).filter(c => ok.has(c.key));
+  const f = ls.get('cj_cli', {}); ['nome', 'fone', 'end'].forEach(k => { if (f[k]) $('#' + k).value = f[k]; }); if (f.ent != null && $('#ent').options[f.ent]) $('#ent').value = f.ent;
+  if (L.gerado) $('#foot').textContent = `CJ Studio 3D · Ideias que ganham forma · Preços atualizados em ${new Date(L.gerado).toLocaleDateString('pt-BR')}`;
+  render(); renderCart(); abrirHash();
+}
+const SITE = 'https://cjstudio3d.github.io/';
+// Link de produto (#p-...): abre direto as fotos do produto
+function abrirHash() { const h = decodeURIComponent(location.hash.slice(1)); if (!h) return; const p = L.produtos.find(x => x.id === h); if (p && (p.fotos || []).length) { Z.f = p.fotos; Z.i = 0; Z.t = [p.nome, p.medidas, brl(p.preco)].filter(Boolean).join(' · '); showZ(); } }
+window.addEventListener('hashchange', abrirHash);
+function kitInfo(k) {
+  const ps = k.itens.map(i => ({ ...i, p: L.produtos.find(x => x.id === i.id) })).filter(i => i.p);
+  return { ps, fotos: ps.map(i => (i.p.fotos || [])[0]).filter(Boolean), off: k.de > k.preco ? Math.round((1 - k.preco / k.de) * 100) : 0 };
+}
+function kitCard(k) {
+  const { ps, fotos, off } = kitInfo(k);
+  return `<article class="prod"><button class="ph" data-zk="${esc(k.id)}" aria-label="Ver ${esc(k.nome)}">${fotos.length ? `<img src="${esc(fotos[0])}" alt="${esc(k.nome)}" loading="lazy">` : '<div class="ini">🎁</div>'}${off ? `<span class="n" style="left:8px;right:auto;background:var(--acc)">-${off}%</span>` : ''}${fotos.length > 1 ? `<span class="n">${fotos.length} fotos</span>` : ''}</button>
+    <div class="bd"><h3>${esc(k.nome)}</h3><div class="med">🎁 ${ps.length} peça(s) no kit</div><p class="ds">${ps.map(i => esc((i.q > 1 ? i.q + '× ' : '') + i.p.nome)).join(' + ')}</p>
+    <div class="pr">${k.de > k.preco ? `<s>${brl(k.de)}</s>` : ''}${brl(k.preco)}</div><button class="add" data-kit="${esc(k.id)}">Adicionar kit ao carrinho</button></div></article>`;
+}
+
+function render() {
+  const nichos = [...new Set(L.produtos.map(p => p.nicho).filter(Boolean))].sort();
+  $('#chips').innerHTML = nichos.length > 1 ? ['', ...nichos].map(n => `<button class="chip${n === NICHO ? ' on' : ''}" data-n="${esc(n)}">${n ? esc(n) : 'Todos'}</button>`).join('') : '';
+  $('#kitsBox').innerHTML = L.kits.length && !Q && !NICHO ? `<h2 class="sec">Kits com desconto</h2><div class="grid">${L.kits.map(kitCard).join('')}</div>` : '';
+  const q = Q.toLowerCase(), lista = L.produtos.filter(p => (!NICHO || p.nicho === NICHO) && (!q || (p.nome + ' ' + p.desc).toLowerCase().includes(q)));
+  if (!L.produtos.length) { $('#lista').innerHTML = `<div class="empty">Estamos atualizando o catálogo. Enquanto isso, chame a gente no <a href="${esc(waUrl('Olá! Quero ver os produtos.'))}" target="_blank" rel="noopener">WhatsApp</a>.</div>`; return; }
+  $('#lista').innerHTML = `<h2 class="sec">${NICHO ? esc(NICHO) : 'Produtos'}</h2>` + (lista.length ? `<div class="grid">${lista.map(p => card(p)).join('')}</div>` : '<div class="empty">Nenhum produto encontrado.</div>');
+}
+function card(p) {
+  const f = p.fotos || [];
+  const vs = (p.variacoes || []).filter(v => v.preco > 0);
+  return `<article class="prod">
+    <button class="ph" ${f.length ? `data-zoom="${esc(p.id)}" aria-label="Ver fotos de ${esc(p.nome)}"` : 'tabindex="-1"'}>${f.length ? `<img src="${esc(f[0])}" alt="${esc(p.nome)}" loading="lazy">` : `<div class="ini">${esc((p.nome || '?')[0])}</div>`}${f.length > 1 ? `<span class="n">${f.length} fotos</span>` : ''}</button>
+    <div class="bd"><h3>${esc(p.nome)}</h3><div class="med">${p.medidas ? '📏 ' + esc(p.medidas) : ''}</div><p class="ds">${esc(p.desc || '')}</p>
+      ${vs.length ? `<select data-var="${esc(p.id)}" aria-label="Tamanho"><option value="">${esc('Padrão · ' + brl(p.preco))}</option>${vs.map((v, i) => `<option value="${i}">${esc(v.nome + ' · ' + brl(v.preco))}</option>`).join('')}</select>` : ''}
+      <div class="pr" id="pr-${esc(p.id)}">${brl(p.preco)}</div>
+      <button class="add" data-add="${esc(p.id)}">Adicionar ao carrinho</button></div></article>`;
+}
+
+function itemInfo(c) {
+  if (c.key.startsWith('k:')) { const k = L.kits.find(x => 'k:' + x.id === c.key); return k ? { nome: k.nome, det: k.itens.map(i => (i.q > 1 ? i.q + '× ' : '') + i.nome).join(' + '), preco: k.preco, foto: (L.produtos.find(p => p.id === k.itens[0]?.id)?.fotos || [])[0] } : null; }
+  const p = L.produtos.find(x => 'p:' + x.id === c.key); if (!p) return null;
+  const v = c.v !== '' && c.v != null ? (p.variacoes || [])[+c.v] : null;
+  return { id: p.id, nome: p.nome, det: v ? v.nome : (p.medidas || ''), vnome: v ? v.nome : '', medidas: p.medidas || '', preco: v ? v.preco : p.preco, foto: (p.fotos || [])[0] };
+}
+function addCart(key, v = '') { const ex = CART.find(c => c.key === key && String(c.v) === String(v)); if (ex) ex.q++; else CART.push({ key, v, q: 1 }); ls.set('cj_cart', CART); renderCart(); toast('Adicionado à encomenda'); }
+function frete() { const e = L.entregas[+$('#ent').value]; return e ? Number(e.valor) || 0 : 0; }
+function totais() { const prod = CART.reduce((a, c) => { const i = itemInfo(c); return a + (i ? i.preco * c.q : 0); }, 0), fr = CART.length ? frete() : 0; return { prod, fr, tot: prod + fr }; }
+function renderCart() {
+  const n = CART.reduce((a, c) => a + c.q, 0), t = totais();
+  $('#fab').hidden = !n; $('#fabN').textContent = n + ' · ' + brl(t.prod);
+  $('#cartLines').innerHTML = CART.length ? CART.map((c, i) => { const it = itemInfo(c); if (!it) return ''; return `<div class="line">${it.foto ? `<img src="${esc(it.foto)}" alt="">` : '<div class="th"></div>'}<div class="inf"><b>${esc(it.nome)}</b><small>${esc(it.det)}${it.det ? ' · ' : ''}${brl(it.preco)}</small></div><div class="qty"><button type="button" data-q="${i}" data-d="-1" aria-label="Menos">−</button><span>${c.q}</span><button type="button" data-q="${i}" data-d="1" aria-label="Mais">+</button></div></div>`; }).join('') : '<p class="note">Sua encomenda está vazia.</p>';
+  $('#sProd').textContent = brl(t.prod); $('#sFrete').textContent = t.fr > 0 ? brl(t.fr) : 'grátis'; $('#sTot').textContent = brl(t.tot);
+  const e = L.entregas[+$('#ent').value]; $('#endBox').hidden = !(e && e.valor > 0);
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('button'); if (!t) return;
+  if (t.dataset.n != null) { NICHO = t.dataset.n; render(); }
+  if (t.dataset.add) { const sel = document.querySelector(`[data-var="${CSS.escape(t.dataset.add)}"]`); addCart('p:' + t.dataset.add, sel ? sel.value : ''); t.classList.add('ok'); t.textContent = '✓ Adicionado'; setTimeout(() => { t.classList.remove('ok'); t.textContent = 'Adicionar ao carrinho'; }, 1200); }
+  if (t.dataset.kit) { addCart('k:' + t.dataset.kit); t.classList.add('ok'); t.textContent = '✓ Kit adicionado'; setTimeout(() => { t.classList.remove('ok'); t.textContent = 'Adicionar kit ao carrinho'; }, 1200); }
+  if (t.dataset.zk) { const k = L.kits.find(x => x.id === t.dataset.zk), inf = kitInfo(k); Z.f = inf.ps.flatMap(i => i.p.fotos || []); Z.i = 0; Z.t = k.nome + ' · ' + brl(k.preco) + ' · ' + inf.ps.map(i => i.p.nome + (i.p.medidas ? ' (' + i.p.medidas + ')' : '')).join(' + '); if (Z.f.length) showZ(); }
+  if (t.dataset.q != null) { const c = CART[+t.dataset.q]; c.q += +t.dataset.d; if (c.q <= 0) CART.splice(+t.dataset.q, 1); ls.set('cj_cart', CART); renderCart(); }
+  if (t.dataset.zoom) { const p = L.produtos.find(x => x.id === t.dataset.zoom); Z.f = p.fotos; Z.i = 0; Z.t = [p.nome, p.medidas, brl(p.preco), p.desc].filter(Boolean).join(' · '); showZ(); }
+});
+document.addEventListener('change', e => { const s = e.target; if (s.dataset.var) { const p = L.produtos.find(x => x.id === s.dataset.var), v = s.value !== '' ? p.variacoes[+s.value] : null; $('#pr-' + CSS.escape(p.id)).textContent = brl(v ? v.preco : p.preco); } if (s.id === 'ent') renderCart(); });
+$('#q').addEventListener('input', e => { Q = e.target.value; render(); });
+$('#fab').onclick = () => { $('#ov').hidden = false; $('#doneBox').innerHTML = ''; };
+$('#close').onclick = () => { $('#ov').hidden = true; };
+$('#ov').addEventListener('click', e => { if (e.target.id === 'ov') $('#ov').hidden = true; });
+const Z = { f: [], i: 0, t: '' };
+function showZ() { $('#zImg').src = Z.f[Z.i]; $('#zT').textContent = Z.t || ''; $('#zoom').hidden = false; $('#zPrev').hidden = $('#zNext').hidden = Z.f.length < 2; }
+$('#zClose').onclick = () => { $('#zoom').hidden = true; };
+$('#zPrev').onclick = () => { Z.i = (Z.i - 1 + Z.f.length) % Z.f.length; showZ(); };
+$('#zNext').onclick = () => { Z.i = (Z.i + 1) % Z.f.length; showZ(); };
+
+$('#form').addEventListener('submit', e => {
+  e.preventDefault();
+  const nome = $('#nome').value.trim(), fone = $('#fone').value.trim(), end = $('#end').value.trim(), obs = $('#obs').value.trim();
+  const en = L.entregas[+$('#ent').value], err = $('#err');
+  if (!CART.length) return err.textContent = 'Adicione pelo menos um produto.';
+  if (!nome) return err.textContent = 'Digite seu nome.';
+  if (fone.replace(/\D/g, '').length < 10) return err.textContent = 'Digite seu WhatsApp com DDD.';
+  if (en && en.valor > 0 && !end) return err.textContent = 'Digite o endereço para entrega.';
+  err.textContent = '';
+  ls.set('cj_cli', { nome, fone, end, ent: $('#ent').value });
+  const t = totais();
+  const linhas = CART.map(c => { const it = itemInfo(c); if (!it) return ''; const sub = [];
+    if (it.medidas && !it.vnome) sub.push('   📏 ' + it.medidas);
+    if (it.id) sub.push('   📷 Foto: ' + SITE + '#' + it.id); else if (it.det) sub.push('   🎁 ' + it.det);
+    return `• ${c.q}× ${it.nome}${it.vnome ? ' (' + it.vnome + ')' : ''}: ${brl(it.preco * c.q)}${c.q > 1 ? ` (${brl(it.preco)} cada)` : ''}${sub.length ? '\n' + sub.join('\n') : ''}`; }).filter(Boolean);
+  const cod = 'CJ' + Date.now().toString(36).slice(-5).toUpperCase();
+  const msg = `🛒 *Nova encomenda pelo site*\nPedido: ${cod}\n\n*Itens*\n${linhas.join('\n')}\n\n*Resumo*\nProdutos: ${brl(t.prod)}\nEntrega: ${en ? en.nome : 'a combinar'}${t.fr > 0 ? ' (' + brl(t.fr) + ')' : ' (grátis)'}\n*Total: ${brl(t.tot)}*\n\n*Cliente*\nNome: ${nome}\nWhatsApp: ${fone}${en && en.valor > 0 ? '\nEndereço: ' + end : ''}${obs ? '\nObs.: ' + obs : ''}\n\nCJ Studio 3D · Ideias que ganham forma`;
+  const url = waUrl(msg);
+  $('#doneBox').innerHTML = `<div class="done">Abrindo o WhatsApp com a encomenda pronta. Se não abrir, <a href="${esc(url)}" target="_blank" rel="noopener"><b>toque aqui</b></a>. Ao enviar a mensagem, a gente confirma prazo e pagamento.</div>`;
+  const a = document.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; document.body.appendChild(a); a.click(); a.remove();
+});
+load();
+</script>
+</body>
+</html>
