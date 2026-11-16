@@ -293,7 +293,7 @@ function extras() {
   const itens = ['🖨️ Feito sob encomenda', '🎨 <b>Personalize</b> com nome e cor', fr ? `🚚 Entrega em ${esc(fr.nome)} por <b>${brl(fr.valor)}</b>` : '', ret ? '📍 Retirada <b>grátis</b>' : '', '🎄 Encomendas de <b>Natal</b> abertas', '💬 Peça pelo WhatsApp', '💳 Pix ou cartão'].filter(Boolean).map(t => `<span>${t}</span>`).join('');
   $('#promo').innerHTML = `<div class="trk">${itens}${itens}</div>`;
   const comFoto = L.produtos.filter(p => (p.fotos || []).length);
-  const vistos = new Set(), pick = [...comFoto.filter(p => NATAL.test(p.nome + ' ' + p.nicho)), ...[...comFoto].sort((a, b) => b.preco - a.preco)].filter(p => { const k = p.nome.toLowerCase(); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 4);
+  const vistos = new Set(), pick = [...comFoto.filter(p => p.dest), ...comFoto.filter(p => NATAL.test(p.nome + ' ' + p.nicho)), ...[...comFoto].sort((a, b) => b.preco - a.preco)].filter(p => { const k = p.nome.toLowerCase(); if (vistos.has(k)) return false; vistos.add(k); return true; }).slice(0, 4);
   $('#hpics').innerHTML = pick.map(p => `<img src="${esc(p.fotos[0])}" alt="${esc(p.nome)}" data-zimg="${esc(p.id)}">`).join('');
   const nat = comFoto.filter(p => NATAL.test(p.nome + ' ' + p.nicho + ' ' + p.desc));
   $('#natal').hidden = nat.length < 3;
