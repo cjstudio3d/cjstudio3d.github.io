@@ -53,7 +53,7 @@ h2.sec{font-family:var(--f-d);font-size:22px;margin:22px 0 10px}
 .bd select{border:1px solid var(--line);border-radius:10px;padding:7px 8px;background:#fff;font-size:13px;width:100%}
 .add{margin-top:auto;border:0;background:var(--ink);color:#fff;border-radius:12px;padding:10px;font-weight:700;font-size:14px}
 .add.ok{background:var(--good)}
-.fab{position:fixed;right:16px;bottom:16px;z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:13px 18px;font-size:15px}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:30;box-shadow:0 10px 30px rgba(0,0,0,.18);padding:13px 18px;font-size:15px}
 .fab[hidden]{display:none}
 .badge{background:#fff;color:var(--acc);border-radius:999px;padding:1px 8px;font-size:12.5px}
 .ov{position:fixed;inset:0;background:rgba(20,16,12,.45);z-index:40;display:flex;justify-content:flex-end}
@@ -96,6 +96,7 @@ footer{color:var(--muted);font-size:13px;padding:30px 0 90px;text-align:center}
   <div class="logo">CJ</div>
   <div class="brand"><b>CJ Studio 3D</b><small>Ideias que ganham forma</small></div>
   <div class="sp"></div>
+  <button class="btn" id="cartTop" type="button" aria-label="Ver carrinho" style="position:relative">🛒 <span id="cartTopN" class="badge" style="background:var(--acc);color:#fff">0</span></button>
   <a class="btn wa" id="waTop" href="#" target="_blank" rel="noopener">WhatsApp</a>
 </div></header>
 
@@ -136,17 +137,17 @@ footer{color:var(--muted);font-size:13px;padding:30px 0 90px;text-align:center}
 
 <script>
 const $ = s => document.querySelector(s);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const brl = v => (Number(v) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 let L = { produtos: [], kits: [], entregas: [] }, NICHO = '', Q = '', CART = [];
-const ls = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+const ls = { get(k, d) { try { return (JSON.parse(localStorage.getItem(k)) || d); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
 function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => el.classList.remove('on'), 1800); }
 function waNum() { let d = String(L.whatsapp || '').replace(/\D/g, ''); if (d && d.length <= 11) d = '55' + d; return d; }
 const waUrl = txt => 'https://wa.me/' + waNum() + (txt ? '?text=' + encodeURIComponent(txt) : '');
 
 async function load() {
   try { const r = await fetch('loja.json?v=' + Date.now(), { cache: 'no-store' }); L = await r.json(); } catch (e) { L = {}; }
-  L.produtos ||= []; L.kits ||= []; L.entregas ||= [];
+  L.produtos = L.produtos || []; L.kits = L.kits || []; L.entregas = L.entregas || [];
   $('#waTop').href = waUrl('Olá! Vim pelo site da CJ Studio 3D.');
   $('#prazo').textContent = [L.prazo, 'Pagamento combinado pelo WhatsApp (Pix ou cartão).'].filter(Boolean).join(' ');
   $('#ent').innerHTML = L.entregas.map((e, i) => `<option value="${i}">${esc(e.nome)} · ${e.valor > 0 ? brl(e.valor) : 'grátis'}</option>`).join('') || '<option value="-1">Combinar pelo WhatsApp</option>';
@@ -196,12 +197,12 @@ function itemInfo(c) {
   const v = c.v !== '' && c.v != null ? (p.variacoes || [])[+c.v] : null;
   return { id: p.id, nome: p.nome, det: v ? v.nome : (p.medidas || ''), vnome: v ? v.nome : '', medidas: p.medidas || '', preco: v ? v.preco : p.preco, foto: (p.fotos || [])[0] };
 }
-function addCart(key, v = '') { const ex = CART.find(c => c.key === key && String(c.v) === String(v)); if (ex) ex.q++; else CART.push({ key, v, q: 1 }); ls.set('cj_cart', CART); renderCart(); toast('Adicionado à encomenda'); }
+function addCart(key, v = '') { const ex = CART.find(c => c.key === key && String(c.v) === String(v)); if (ex) ex.q++; else CART.push({ key, v, q: 1 }); ls.set('cj_cart', CART); renderCart(); toast('✓ Adicionado ao carrinho · toque em 🛒 para finalizar'); }
 function frete() { const e = L.entregas[+$('#ent').value]; return e ? Number(e.valor) || 0 : 0; }
 function totais() { const prod = CART.reduce((a, c) => { const i = itemInfo(c); return a + (i ? i.preco * c.q : 0); }, 0), fr = CART.length ? frete() : 0; return { prod, fr, tot: prod + fr }; }
 function renderCart() {
   const n = CART.reduce((a, c) => a + c.q, 0), t = totais();
-  $('#fab').hidden = !n; $('#fabN').textContent = n + ' · ' + brl(t.prod);
+  $('#fab').hidden = !n; $('#fabN').textContent = n + ' · ' + brl(t.prod); $('#cartTopN').textContent = n;
   $('#cartLines').innerHTML = CART.length ? CART.map((c, i) => { const it = itemInfo(c); if (!it) return ''; return `<div class="line">${it.foto ? `<img src="${esc(it.foto)}" alt="">` : '<div class="th"></div>'}<div class="inf"><b>${esc(it.nome)}</b><small>${esc(it.det)}${it.det ? ' · ' : ''}${brl(it.preco)}</small></div><div class="qty"><button type="button" data-q="${i}" data-d="-1" aria-label="Menos">−</button><span>${c.q}</span><button type="button" data-q="${i}" data-d="1" aria-label="Mais">+</button></div></div>`; }).join('') : '<p class="note">Sua encomenda está vazia.</p>';
   $('#sProd').textContent = brl(t.prod); $('#sFrete').textContent = t.fr > 0 ? brl(t.fr) : 'grátis'; $('#sTot').textContent = brl(t.tot);
   const e = L.entregas[+$('#ent').value]; $('#endBox').hidden = !(e && e.valor > 0);
@@ -209,14 +210,15 @@ function renderCart() {
 
 document.addEventListener('click', e => {
   const t = e.target.closest('button'); if (!t) return;
+  if (t.id === 'cartTop') { $('#ov').hidden = false; $('#doneBox').innerHTML = ''; return; }
   if (t.dataset.n != null) { NICHO = t.dataset.n; render(); }
-  if (t.dataset.add) { const sel = document.querySelector(`[data-var="${CSS.escape(t.dataset.add)}"]`); addCart('p:' + t.dataset.add, sel ? sel.value : ''); t.classList.add('ok'); t.textContent = '✓ Adicionado'; setTimeout(() => { t.classList.remove('ok'); t.textContent = 'Adicionar ao carrinho'; }, 1200); }
+  if (t.dataset.add) { const sel = [...document.querySelectorAll('select[data-var]')].find(x => x.dataset.var === t.dataset.add); addCart('p:' + t.dataset.add, sel ? sel.value : ''); t.classList.add('ok'); t.textContent = '✓ Adicionado'; setTimeout(() => { t.classList.remove('ok'); t.textContent = 'Adicionar ao carrinho'; }, 1200); }
   if (t.dataset.kit) { addCart('k:' + t.dataset.kit); t.classList.add('ok'); t.textContent = '✓ Kit adicionado'; setTimeout(() => { t.classList.remove('ok'); t.textContent = 'Adicionar kit ao carrinho'; }, 1200); }
   if (t.dataset.zk) { const k = L.kits.find(x => x.id === t.dataset.zk), inf = kitInfo(k); Z.f = inf.ps.flatMap(i => i.p.fotos || []); Z.i = 0; Z.t = k.nome + ' · ' + brl(k.preco) + ' · ' + inf.ps.map(i => i.p.nome + (i.p.medidas ? ' (' + i.p.medidas + ')' : '')).join(' + '); if (Z.f.length) showZ(); }
   if (t.dataset.q != null) { const c = CART[+t.dataset.q]; c.q += +t.dataset.d; if (c.q <= 0) CART.splice(+t.dataset.q, 1); ls.set('cj_cart', CART); renderCart(); }
   if (t.dataset.zoom) { const p = L.produtos.find(x => x.id === t.dataset.zoom); Z.f = p.fotos; Z.i = 0; Z.t = [p.nome, p.medidas, brl(p.preco), p.desc].filter(Boolean).join(' · '); showZ(); }
 });
-document.addEventListener('change', e => { const s = e.target; if (s.dataset.var) { const p = L.produtos.find(x => x.id === s.dataset.var), v = s.value !== '' ? p.variacoes[+s.value] : null; $('#pr-' + CSS.escape(p.id)).textContent = brl(v ? v.preco : p.preco); } if (s.id === 'ent') renderCart(); });
+document.addEventListener('change', e => { const s = e.target; if (s.dataset.var) { const p = L.produtos.find(x => x.id === s.dataset.var), v = s.value !== '' ? p.variacoes[+s.value] : null; document.getElementById('pr-' + p.id).textContent = brl(v ? v.preco : p.preco); } if (s.id === 'ent') renderCart(); });
 $('#q').addEventListener('input', e => { Q = e.target.value; render(); });
 $('#fab').onclick = () => { $('#ov').hidden = false; $('#doneBox').innerHTML = ''; };
 $('#close').onclick = () => { $('#ov').hidden = true; };
